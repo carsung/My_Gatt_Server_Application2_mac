@@ -64,21 +64,18 @@ public class GattServerActivity extends AppCompatActivity {
             finish();
         }
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 0);
+        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.BLUETOOTH_ADVERTISE}, 0);
+        }
+
         // Register for system Bluetooth events
         IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
         registerReceiver(mBluetoothReceiver, filter);
         if (!bluetoothAdapter.isEnabled()) {
             Log.d(TAG, "Bluetooth is currently disabled...enabling");
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             bluetoothAdapter.enable();
         } else {
             Log.d(TAG, "Bluetooth enabled...starting services");
@@ -226,12 +223,7 @@ public class GattServerActivity extends AppCompatActivity {
             requestPermissions(permissions, 100);
             return;
         }*/
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 0);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.BLUETOOTH_ADVERTISE}, 0);
-        }
+
 
         mBluetoothLeAdvertiser
                 .startAdvertising(settings, data, mAdvertiseCallback);
@@ -397,7 +389,7 @@ public class GattServerActivity extends AppCompatActivity {
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
-                    return;
+                    requestPermissions(new String[]{Manifest.permission.BLUETOOTH_CONNECT}, 0);
                 }
                 mBluetoothGattServer.sendResponse(device,
                         requestId,
