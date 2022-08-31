@@ -292,7 +292,7 @@ public class GattServerActivity extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+//            return;
         }
         mBluetoothGattServer.close();
     }
@@ -337,7 +337,7 @@ public class GattServerActivity extends AppCompatActivity {
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
-                return;
+//                return;
             }
             mBluetoothGattServer.notifyCharacteristicChanged(device, timeCharacteristic, false);
         }
@@ -433,7 +433,7 @@ public class GattServerActivity extends AppCompatActivity {
                     //                                          int[] grantResults)
                     // to handle the case where the user grants the permission. See the documentation
                     // for ActivityCompat#requestPermissions for more details.
-                    return;
+//                    return;
                 }
                 mBluetoothGattServer.sendResponse(device,
                         requestId,
@@ -473,7 +473,7 @@ public class GattServerActivity extends AppCompatActivity {
                         //                                          int[] grantResults)
                         // to handle the case where the user grants the permission. See the documentation
                         // for ActivityCompat#requestPermissions for more details.
-                        return;
+//                        return;
                     }
                     mBluetoothGattServer.sendResponse(device,
                             requestId,
